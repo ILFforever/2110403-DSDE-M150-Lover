@@ -1,0 +1,54 @@
+name: 'traffy_analytics'
+version: '1.0.0'
+config-version: 2
+
+# Project profile
+profile: 'traffy_analytics'
+
+# Directories
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Model configurations
+models:
+  traffy_analytics:
+    # Staging models - materialized as views
+    staging:
+      +materialized: view
+      +schema: staging
+
+    # Core models - materialized as tables
+    core:
+      +materialized: table
+      +schema: core
+
+    # Mart models - materialized as tables
+    marts:
+      +materialized: table
+      +schema: marts
+
+# Seeds configuration
+seeds:
+  traffy_analytics:
+    +schema: seeds
+
+# Snapshot configuration
+snapshots:
+  traffy_analytics:
+    +target_schema: snapshots
+    +strategy: timestamp
+    +updated_at: last_activity
+
+# Vars
+vars:
+  start_date: '2021-08-01'
+  end_date: '2025-01-31'
