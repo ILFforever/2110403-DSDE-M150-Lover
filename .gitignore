@@ -1,1 +1,113 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Data files (large files)
 *.csv
+*.parquet
+*.pkl
+*.h5
+*.hdf5
+data/raw/*
+data/processed/*
+data/external/*
+data/delta_lake/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/external/.gitkeep
+
+# Model files
+ml_models/forecasting/models/*.h5
+ml_models/forecasting/models/*.pkl
+ml_models/anomaly_detection/models/*
+ml_models/forecasting/checkpoints/*
+!ml_models/**/.gitkeep
+
+# Logs
+logs/
+*.log
+*.out
+
+# Airflow
+airflow/logs/
+airflow.db
+airflow.cfg
+airflow-webserver.pid
+standalone_admin_password.txt
+
+# dbt
+data_engineering/dbt/target/
+data_engineering/dbt/dbt_packages/
+data_engineering/dbt/logs/
+
+# Docker
+*.pid
+docker-compose.override.yml
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Output files
+visualization/dashboard/outputs/*
+visualization/graphs/outputs/*
+!visualization/**/outputs/.gitkeep
+
+# Delta Lake
+_delta_log/
+*.checkpoint.parquet
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# OS
+Thumbs.db
