@@ -1,234 +1,426 @@
-# Urban Issue Forecasting System - Traffy Fondue Analysis
+# Fourier Transform Complete Tutorial Package
 
-## Project Overview
-This project implements an end-to-end **Urban Issue Forecasting System** with multi-source data integration for analyzing Bangkok's citizen complaint data from Traffy Fondue (Aug 2021 - Jan 2025).
-
-## Team: M150-Lover
-**Course**: 2110403 Data Science and Data Engineering (DSDE-CEDT)
-**Dataset**: 700,000+ complaint records from Bangkok Metropolitan Administration
-
-## Project Components
-
-### 1. AI/ML Component
-- **Time-Series Forecasting**: LSTM and Prophet models for predicting complaint volumes by category and location
-- **Anomaly Detection**: Isolation Forest and statistical methods to identify unusual complaint patterns
-- **Models Include**:
-  - Complaint volume prediction by district
-  - Category-based forecasting
-  - Seasonal pattern detection
-  - Real-time anomaly alerts
-
-### 2. Data Engineering Component
-- **Apache Spark**: Distributed processing of 100k+ records
-- **Delta Lake**: Versioned data storage with ACID transactions
-- **dbt**: Data transformation and modeling
-- **Apache Airflow**: Workflow orchestration and scheduling
-- **Pipeline Architecture**:
-  ```
-  Raw Data → Spark Processing → Delta Lake → dbt Transformations → Feature Store → Models
-  ```
-
-### 3. Visualization Component
-- **Geospatial Dashboard**: Interactive map with Plotly/Folium
-  - Time-slider for complaint evolution
-  - Heat maps by district and category
-  - Cluster analysis visualization
-- **Graph Network**: Relationship network of complaint types
-  - Co-occurrence analysis
-  - Community detection
-  - Influential node identification
-
-### 4. Web Scraping & External Data
-- **BMA Flood Monitoring**: Real-time flood alerts and historical data
-- **Traffic Data**: Bangkok traffic incident reports
-- **Construction Permits**: Building permit data
-- **Public Events**: Event calendar data
-- **Population Density**: Census and demographic data
-- **Total**: 1,000+ additional records integrated
-
-## Directory Structure
-```
-├── data_engineering/       # Spark, Delta Lake, dbt workflows
-│   ├── spark/             # PySpark processing scripts
-│   ├── dbt/               # Data transformation models
-│   └── delta_lake/        # Delta table management
-├── ml_models/             # Machine learning models
-│   ├── forecasting/       # Time-series prediction models
-│   └── anomaly_detection/ # Anomaly detection algorithms
-├── web_scraping/          # External data collection
-├── airflow/               # Workflow orchestration
-│   ├── dags/              # Airflow DAG definitions
-│   └── plugins/           # Custom operators
-├── visualization/         # Interactive dashboards
-│   ├── dashboard/         # Geospatial visualization
-│   └── graphs/            # Network graph analysis
-├── config/                # Configuration files
-├── notebooks/             # Jupyter notebooks for analysis
-├── scripts/               # Utility scripts
-├── tests/                 # Unit and integration tests
-└── docs/                  # Documentation
-```
-
-## Quick Start
-
-### Prerequisites
-```bash
-Python 3.8+
-Apache Spark 3.x
-Docker & Docker Compose
-```
-
-### Installation
-```bash
-# Clone repository
-git clone https://github.com/ILFforever/2110403-DSDE-M150-Lover.git
-cd 2110403-DSDE-M150-Lover
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Download cleaned data (~800MB)
-# https://github.com/ParinthornThammarux/2110403-DSDE-M150-Lover/releases/tag/v1.0
-```
-
-### Running the Pipeline
-
-#### 1. Data Processing with Spark
-```bash
-python data_engineering/spark/process_traffy_data.py
-```
-
-#### 2. Start Airflow
-```bash
-docker-compose up -d
-# Access at http://localhost:8080
-```
-
-#### 3. Run ML Models
-```bash
-# Forecasting
-python ml_models/forecasting/train_lstm_model.py
-
-# Anomaly Detection
-python ml_models/anomaly_detection/detect_anomalies.py
-```
-
-#### 4. Launch Dashboard
-```bash
-streamlit run visualization/dashboard/app.py
-# Access at http://localhost:8501
-```
-
-## Key Features
-
-### Time-Series Forecasting
-- Predicts complaint volumes 7-30 days ahead
-- Category-specific models (flooding, traffic, waste, etc.)
-- District-level granularity
-- Confidence intervals and uncertainty quantification
-
-### Anomaly Detection
-- Real-time detection of unusual patterns
-- Spatial anomaly identification
-- Temporal spike detection
-- Multi-dimensional outlier analysis
-
-### Interactive Visualizations
-- **Geospatial Map**:
-  - Complaint density heat maps
-  - Time-slider animation (2021-2025)
-  - Filter by category, district, status
-  - Clustering visualization
-- **Network Graph**:
-  - Complaint type co-occurrence
-  - Organization collaboration network
-  - Community detection
-  - Centrality analysis
-
-### Data Pipeline
-- **Automated ETL**: Scheduled daily refreshes
-- **Data Quality**: Validation and cleaning
-- **Versioning**: Delta Lake time-travel capabilities
-- **Scalability**: Distributed processing with Spark
-
-## Data Schema
-
-### Main Dataset (Traffy Fondue)
-- `ticket_id`: Unique identifier
-- `type`: Complaint category (multi-label)
-- `organization`: Handling department
-- `comment`: User feedback
-- `coords`: Latitude, longitude
-- `address`: Physical location
-- `district`, `subdistrict`: Administrative areas
-- `timestamp`: Creation time
-- `state`: Status (completed, in-progress, pending)
-- `solve_days`: Resolution time
-
-### External Data Sources
-- **Flood Data**: Water levels, affected areas
-- **Traffic**: Incident locations, severity
-- **Construction**: Permit locations, durations
-- **Events**: Public gatherings, festivals
-- **Demographics**: Population density, income levels
-
-## Technologies Used
-
-### Data Engineering
-- Apache Spark 3.x
-- Delta Lake
-- dbt
-- Apache Airflow
-- PostgreSQL
-
-### Machine Learning
-- TensorFlow/Keras (LSTM)
-- Prophet (Facebook)
-- Scikit-learn
-- XGBoost
-- PyTorch
-
-### Visualization
-- Plotly
-- Folium
-- NetworkX
-- Streamlit
-- Dash
-
-### Web Scraping
-- BeautifulSoup4
-- Selenium
-- Scrapy
-- Requests
-
-## Results & Insights
-
-### Key Findings
-1. **Seasonal Patterns**: Flooding complaints spike during monsoon season (May-October)
-2. **Geographic Hotspots**: Central districts have 3x higher complaint density
-3. **Resolution Time**: Average 45 days, varies significantly by category
-4. **Complaint Networks**: Strong correlation between traffic and road maintenance issues
-
-### Model Performance
-- **LSTM Forecasting**: MAPE < 15% for 7-day predictions
-- **Anomaly Detection**: 95% precision, 89% recall
-- **Processing Speed**: 100k records in < 5 minutes (Spark cluster)
-
-## Contributing
-This is an academic project for DSDE course. Team members:
-- [List team members here]
-
-## License
-Educational use only - Course project for Chulalongkorn University
-
-## Acknowledgments
-- Traffy Fondue for providing the dataset
-- Bangkok Metropolitan Administration
-- Course instructors and TAs
-
-## Contact
-For questions or collaboration: [Your contact info]
+A comprehensive, self-contained learning package for mastering Fourier transforms from fundamentals to advanced applications.
 
 ---
-**Last Updated**: December 2025
-**Project Status**: Active Development
+
+## 📚 What's Included
+
+This repository contains everything you need to learn Fourier transforms:
+
+### Tutorial Documents (5 Files)
+
+1. **README_FOURIER_TUTORIAL.md** - Your complete learning roadmap
+2. **signal_processing_fundamentals.md** - Prerequisites and foundations (60+ pages)
+3. **fourier_transform_tutorial.md** - Main Fourier Transform tutorial
+4. **fourier_problems_and_solutions.md** - 16 practice problems with solutions
+5. **fourier_quick_reference.md** - Cheat sheet for quick lookup
+
+### Code & Visualizations
+
+- **fourier_visualizations.py** - Python script to generate all examples
+- **example1-8.png** - Pre-generated visualization images
+
+---
+
+## 🚀 Quick Start
+
+### View the Visualizations
+```bash
+# All 8 visualization examples are already generated as PNG files
+ls example*.png
+```
+
+### Generate Visualizations Yourself
+```bash
+# Install dependencies
+pip install numpy scipy matplotlib
+
+# Run the visualization script
+python fourier_visualizations.py
+```
+
+### Start Learning
+1. Read **README_FOURIER_TUTORIAL.md** first for the learning path
+2. Begin with **signal_processing_fundamentals.md** (foundations)
+3. Progress to **fourier_transform_tutorial.md** (main course)
+4. Practice with **fourier_problems_and_solutions.md**
+5. Keep **fourier_quick_reference.md** handy for reference
+
+---
+
+## 📖 Recommended Learning Path
+
+### Beginner (No Prior Knowledge)
+```
+Week 1: signal_processing_fundamentals.md (Sections 1-4)
+Week 2: signal_processing_fundamentals.md (Sections 5-8)
+Week 3: fourier_transform_tutorial.md (Sections 1-5)
+Week 4: fourier_transform_tutorial.md (Sections 6-9) + Run visualizations
+Week 5: fourier_problems_and_solutions.md (Practice problems)
+Week 6: Apply to real data projects
+```
+
+### Intermediate (Some Signals Background)
+```
+Day 1-2: Review signal_processing_fundamentals.md
+Day 3-4: Study fourier_transform_tutorial.md
+Day 5:   Run fourier_visualizations.py and analyze outputs
+Day 6-7: Practice with fourier_problems_and_solutions.md
+```
+
+### Quick Reference (Already Know FT)
+```
+Keep fourier_quick_reference.md as your go-to reference guide!
+```
+
+---
+
+## 🎯 What You'll Learn
+
+### Fundamentals
+✅ Continuous vs discrete signals
+✅ Signal operations (shifting, scaling, convolution)
+✅ Derivatives and integrals of signals
+✅ LTI systems and impulse response
+✅ Energy and power signals
+
+### Fourier Transform
+✅ Intuitive understanding (musical analogy)
+✅ Mathematical foundation (Euler's formula)
+✅ Continuous Fourier Transform (CFT)
+✅ Discrete Fourier Transform (DFT)
+✅ Fast Fourier Transform (FFT algorithm)
+✅ Key properties and theorems
+
+### Practical Skills
+✅ Computing DFT by hand
+✅ Using FFT in Python/NumPy
+✅ Sampling and Nyquist theorem
+✅ Frequency resolution and windowing
+✅ Designing frequency-domain filters
+✅ Real-world applications
+
+---
+
+## 📊 Content Statistics
+
+- **5 comprehensive documents** (100+ pages)
+- **30+ worked examples** with step-by-step solutions
+- **16 practice problems** covering all topics
+- **8 visualizations** demonstrating key concepts
+- **100+ formulas and derivations**
+- **Complete Python implementations**
+
+---
+
+## 🎨 Visualizations Included
+
+1. **example1_pure_sine.png** - Pure sine wave FFT
+2. **example2_multiple_frequencies.png** - Multiple frequency decomposition
+3. **example3_rectangular_pulse.png** - Rectangular pulse and sinc function
+4. **example4_noise_filtering.png** - Noise removal demonstration
+5. **example5_sampling_aliasing.png** - Sampling theorem and aliasing
+6. **example6_windowing.png** - Window length effects
+7. **example7_2d_fourier.png** - 2D Fourier Transform for images
+8. **example8_audio_spectrum.png** - Audio spectrum analysis
+
+---
+
+## 💻 Python Examples
+
+### Basic FFT Analysis
+```python
+import numpy as np
+from scipy.fft import fft, fftfreq
+import matplotlib.pyplot as plt
+
+# Generate signal
+fs = 1000  # Sampling rate
+t = np.linspace(0, 1, fs, endpoint=False)
+signal = np.sin(2*np.pi*50*t)  # 50 Hz sine
+
+# Compute FFT
+fft_result = fft(signal)
+freqs = fftfreq(len(signal), 1/fs)
+magnitude = np.abs(fft_result)
+
+# Plot spectrum
+plt.plot(freqs[:fs//2], magnitude[:fs//2])
+plt.xlabel('Frequency (Hz)')
+plt.ylabel('Magnitude')
+plt.show()
+```
+
+### Low-Pass Filtering
+```python
+from scipy.fft import fft, ifft
+
+# Filter signal
+fft_result = fft(signal)
+freqs = fftfreq(len(signal), 1/fs)
+fft_result[np.abs(freqs) > 100] = 0  # Cutoff at 100 Hz
+filtered = np.real(ifft(fft_result))
+```
+
+More examples in `fourier_visualizations.py`!
+
+---
+
+## 🔍 Topics Covered in Detail
+
+### Signal Processing Fundamentals
+- Continuous and discrete signals
+- Sampling and reconstruction
+- Time shifting, scaling, and reversal
+- Convolution (5 detailed examples)
+- Derivatives and integrals
+- LTI systems and properties
+- Correlation (auto and cross)
+- Energy vs power signals
+
+### Fourier Transform Theory
+- Mathematical prerequisites (complex numbers, Euler's formula)
+- Intuitive understanding (music and recipe analogies)
+- Continuous Fourier Transform derivation
+- Discrete Fourier Transform (DFT)
+- Fast Fourier Transform (FFT) algorithm
+- Transform properties (linearity, convolution theorem, etc.)
+- Transform pairs (sine, cosine, rect, sinc, Gaussian)
+
+### Practical Applications
+- Audio processing (equalizers, noise reduction)
+- Image processing (JPEG compression, filtering)
+- Communications (modulation, OFDM)
+- Data analysis (periodic pattern detection)
+- Music analysis and synthesis
+- Medical signal processing
+
+### Problem-Solving Skills
+- Frequency and period calculations
+- Complex number operations
+- Hand-computing DFT
+- Nyquist theorem applications
+- Frequency resolution problems
+- Filter design
+- Power spectrum analysis
+- Real-world scenario solving
+
+---
+
+## 🎓 Prerequisites
+
+**Minimal Prerequisites:**
+- Basic calculus (derivatives, integrals)
+- Basic programming (Python helpful but not required)
+- Willingness to learn!
+
+**Nice to Have:**
+- Linear algebra basics
+- Some exposure to signals or waves
+- Python/NumPy experience
+
+All necessary mathematics is explained in the tutorials!
+
+---
+
+## 📈 Learning Outcomes
+
+After completing this tutorial, you will:
+
+✅ Understand why Fourier Transform exists (intuitive + mathematical)
+✅ Compute DFT by hand for small sequences
+✅ Implement FFT analysis in Python
+✅ Design frequency-domain filters
+✅ Choose appropriate sampling rates
+✅ Interpret magnitude and phase spectra
+✅ Apply FT to real problems
+✅ Explain concepts clearly to others
+✅ Debug common FFT issues
+✅ Read research papers using Fourier analysis
+
+---
+
+## 🌟 Next Steps After Mastery
+
+### Advanced Topics
+- Short-Time Fourier Transform (STFT)
+- Wavelet Transform
+- Laplace Transform
+- Z-Transform
+- 2D/3D FFT for images and volumes
+
+### Project Ideas
+1. Real-time spectrum analyzer
+2. Music visualizer
+3. Audio effects processor (reverb, chorus)
+4. Noise cancellation system
+5. Image compression algorithm
+6. Signal pattern detector
+
+### Applications
+- Build audio processing tools
+- Implement image filters
+- Study communication systems
+- Analyze time series data
+- Process medical signals
+
+---
+
+## 📚 Additional Resources
+
+### Books
+- "Understanding Digital Signal Processing" by Richard Lyons
+- "The Scientist and Engineer's Guide to DSP" by Steven W. Smith (FREE online!)
+
+### Videos
+- 3Blue1Brown: "But what is the Fourier Transform?" (YouTube - highly recommended!)
+
+### Online
+- NumPy FFT Documentation
+- SciPy Signal Processing Guide
+- Wolfram MathWorld: Fourier Transform
+
+---
+
+## 🤝 How to Use This Repository
+
+### For Self-Study
+1. Clone/download this repository
+2. Follow the recommended learning path
+3. Work through examples with pen and paper
+4. Run the Python visualizations
+5. Solve practice problems
+
+### For Teaching
+- Use as course supplement
+- Assign specific sections for homework
+- Use visualizations in lectures
+- Reference formulas from quick guide
+
+### For Reference
+- Keep `fourier_quick_reference.md` handy
+- Refer to worked examples when solving problems
+- Use Python code as templates
+
+---
+
+## ⚡ Quick Reference
+
+### Key Formulas
+
+**DFT:**
+```
+X[k] = Σ_{n=0}^{N-1} x[n]·e^(-i2πkn/N)
+```
+
+**Nyquist:**
+```
+f_s ≥ 2·f_max
+```
+
+**Frequency Resolution:**
+```
+Δf = f_s / N
+```
+
+**Convolution Theorem:**
+```
+f(t) ⊗ g(t) ↔ F(ω)·G(ω)
+```
+
+More in `fourier_quick_reference.md`!
+
+---
+
+## 🔧 Requirements
+
+### For Reading
+- Any markdown viewer or text editor
+- PDF viewer for viewing PNG images
+
+### For Running Code
+```bash
+pip install numpy scipy matplotlib
+```
+
+### Tested On
+- Python 3.7+
+- NumPy 1.19+
+- SciPy 1.5+
+- Matplotlib 3.3+
+
+---
+
+## 📝 File Structure
+
+```
+.
+├── README.md                           # This file
+├── README_FOURIER_TUTORIAL.md          # Complete learning guide
+├── signal_processing_fundamentals.md   # Prerequisites (60+ pages)
+├── fourier_transform_tutorial.md       # Main FT tutorial
+├── fourier_problems_and_solutions.md   # 16 practice problems
+├── fourier_quick_reference.md          # Cheat sheet
+├── fourier_visualizations.py           # Python visualization code
+├── example1_pure_sine.png             # Visualization 1
+├── example2_multiple_frequencies.png   # Visualization 2
+├── example3_rectangular_pulse.png      # Visualization 3
+├── example4_noise_filtering.png        # Visualization 4
+├── example5_sampling_aliasing.png      # Visualization 5
+├── example6_windowing.png             # Visualization 6
+├── example7_2d_fourier.png            # Visualization 7
+└── example8_audio_spectrum.png         # Visualization 8
+```
+
+---
+
+## 🎉 Get Started Now!
+
+1. **Start with:** `README_FOURIER_TUTORIAL.md` for your learning roadmap
+2. **Learn from:** `signal_processing_fundamentals.md` → `fourier_transform_tutorial.md`
+3. **Practice with:** `fourier_problems_and_solutions.md`
+4. **Reference:** `fourier_quick_reference.md`
+5. **Visualize:** Run `python fourier_visualizations.py`
+
+---
+
+## 💡 Study Tips
+
+- **Don't rush** - Take time to understand each concept
+- **Work examples by hand** - Don't just read, calculate!
+- **Visualize everything** - Draw time and frequency domain plots
+- **Code along** - Type and run examples yourself
+- **Teach others** - Best way to solidify understanding
+- **Ask "why?"** - Understand intuition, not just formulas
+
+---
+
+## 🏆 Success Metrics
+
+You've mastered Fourier transforms when you can:
+
+- [ ] Explain FT to a beginner using analogies
+- [ ] Derive key properties from first principles
+- [ ] Compute 4-point DFT without a calculator
+- [ ] Choose correct sampling rate for any application
+- [ ] Debug FFT code producing wrong results
+- [ ] Design filters for specific problems
+- [ ] Apply FT to your own projects
+- [ ] Read research papers using Fourier analysis
+
+---
+
+## 📧 Feedback
+
+This is a self-contained educational package. All materials are designed to be:
+- **Clear** - Step-by-step explanations
+- **Complete** - Everything you need in one place
+- **Practical** - Real code and examples
+- **Self-paced** - Learn at your own speed
+
+---
+
+**Happy Learning! 🎵📊🔬**
+
+*Complete Tutorial Package - From Zero to Fourier Transform Master*
